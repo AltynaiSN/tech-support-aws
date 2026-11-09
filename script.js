@@ -8,54 +8,34 @@ const filter = document.getElementById("filter");
 let requestNumber = 0;
 let requests = [];
 
-
 form.addEventListener("submit", function(event) {
-
     event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
     const room = document.getElementById("room").value.trim();
     const email = document.getElementById("email").value.trim();
-
-    const category =
-        document.getElementById("category").value;
-
-    const priority =
-        document.getElementById("priority").value;
-
-    const description =
-        document.getElementById("description").value.trim();
-
+    const category = document.getElementById("category").value;
+    const priority = document.getElementById("priority").value;
+    const description = document.getElementById("description").value.trim();
 
     if (name === "" || room === "" || email === "") {
-
         alert("Пожалуйста, заполните все обязательные поля.");
-
         return;
     }
-
 
     if (!email.includes("@")) {
-
         alert("Введите правильный Email.");
-
         return;
     }
-
 
     if (description.length < 10) {
-
         alert("Описание проблемы должно содержать минимум 10 символов.");
-
         return;
     }
-
 
     requestNumber++;
 
-
     const request = {
-
         number: requestNumber,
         name: name,
         room: room,
@@ -65,97 +45,54 @@ form.addEventListener("submit", function(event) {
         description: description,
         status: "Новая",
         date: new Date().toLocaleString()
-
     };
 
-
     requests.push(request);
-
     displayRequests(requests);
-
     form.reset();
-
 });
 
 function displayRequests(list) {
-
     requestsContainer.innerHTML = "";
 
     list.forEach(function(request) {
-
         const card = document.createElement("div");
-
         card.className = "request-card";
 
-
         const title = document.createElement("h3");
-
-        title.textContent =
-            "Заявка №" + request.number;
-
+        title.textContent = "Заявка №" + request.number;
 
         const user = document.createElement("p");
-
-        user.textContent =
-            "Пользователь: " + request.name;
-
+        user.textContent = "Пользователь: " + request.name;
 
         const room = document.createElement("p");
-
-        room.textContent =
-            "Кабинет: " + request.room;
-
+        room.textContent = "Кабинет: " + request.room;
 
         const email = document.createElement("p");
-
-        email.textContent =
-            "Email: " + request.email;
-
+        email.textContent = "Email: " + request.email;
 
         const category = document.createElement("p");
-
-        category.textContent =
-            "Категория: " + request.category;
-
+        category.textContent = "Категория: " + request.category;
 
         const priority = document.createElement("p");
-
-        priority.textContent =
-            "Приоритет: " + request.priority;
-
+        priority.textContent = "Приоритет: " + request.priority;
 
         const description = document.createElement("p");
-
-        description.textContent =
-            "Описание: " + request.description;
-
+        description.textContent = "Описание: " + request.description;
 
         const date = document.createElement("p");
-
-        date.textContent =
-            "Создано: " + request.date;
-
+        date.textContent = "Создано: " + request.date;
 
         const status = document.createElement("p");
+        status.textContent = "Статус: " + request.status;
 
-        status.textContent =
-            "Статус: " + request.status;
-
-
-        const doneButton =
-            document.createElement("button");
-
+        const doneButton = document.createElement("button");
         doneButton.textContent = "Выполнено";
 
-
         doneButton.addEventListener("click", function() {
-
             request.status = "Выполнено";
-
             applyFilter();
-
         });
-
 
         card.appendChild(title);
         card.appendChild(user);
@@ -167,66 +104,44 @@ function displayRequests(list) {
         card.appendChild(date);
         card.appendChild(status);
 
-
         if (request.status === "Новая") {
-
             card.appendChild(doneButton);
-
         }
 
-
         requestsContainer.appendChild(card);
-
     });
-
 }
 
 searchButton.addEventListener("click", function() {
-
     applyFilter();
-
 });
-
 
 filter.addEventListener("change", function() {
-
     applyFilter();
-
 });
 
-
 function applyFilter() {
-
-    const searchText =
-        searchInput.value.toLowerCase();
-
-    const selectedStatus =
-        filter.value;
-
+    const searchText = searchInput.value.toLowerCase();
+    const selectedStatus = filter.value;
 
     const result = requests.filter(function(request) {
-
         const matchesSearch =
-
             request.name.toLowerCase().includes(searchText) ||
-
             request.category.toLowerCase().includes(searchText) ||
-
             request.description.toLowerCase().includes(searchText);
 
-
         const matchesStatus =
-
             selectedStatus === "Все" ||
-
             request.status === selectedStatus;
 
-
         return matchesSearch && matchesStatus;
-
     });
 
-    
+    displayRequests(result);
+}
+
+// --- БЛОК АВТОРИЗАЦИИ И ЗАЩИТЫ АДМИН-ПАНЕЛИ ---
+
 function checkAccess() {
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     const adminBlock = document.getElementById('admin-block');
@@ -240,7 +155,6 @@ function checkAccess() {
         if (authBtn) authBtn.innerText = 'Войти как admin';
     }
 }
-
 
 function toggleAuth() {
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
@@ -261,10 +175,5 @@ function toggleAuth() {
     }
 }
 
+// Запуск проверки доступа при загрузке документа
 document.addEventListener('DOMContentLoaded', checkAccess);
-
-
-    displayRequests(result);
-
-}
-
