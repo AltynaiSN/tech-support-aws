@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Техническая поддержка</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Техническая поддержка</h1>
+    <p>Регистрация заявок на техническое обслуживание компьютеров</p>
+</header>
+
+<main>
+
+    <section class="form-block">
+
+        <h2>Создать заявку</h2>
+
+        <form id="supportForm">
+
+            <label for="name">ФИО пользователя:</label>
+            <input type="text" id="name"
+                   placeholder="Введите ФИО">
+
+            <label for="room">Кабинет:</label>
+            <input type="text" id="room"
+                   placeholder="Например: 205">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email"
+                   placeholder="student@example.com">
+
+            <label for="category">Категория проблемы:</label>
+
+            <select id="category">
+                <option value="Не включается компьютер">
+                    Не включается компьютер
+                </option>
+
+                <option value="Проблема с Интернетом">
+                    Проблема с Интернетом
+                </option>
+
+                <option value="Принтер">
+                    Принтер
+                </option>
+
+                <option value="Медленная работа ПК">
+                    Медленная работа ПК
+                </option>
+
+                <option value="Программное обеспечение">
+                    Программное обеспечение
+                </option>
+
+                <option value="Другое">
+                    Другое
+                </option>
+            </select>
+
+            <label for="priority">Приоритет:</label>
+
+            <select id="priority">
+                <option value="Низкий">Низкий</option>
+                <option value="Средний">Средний</option>
+                <option value="Высокий">Высокий</option>
+                <option value="Критический">Критический</option>
+            </select>
+
+            <label for="description">Описание проблемы:</label>
+
+            <textarea
+                id="description"
+                placeholder="Опишите проблему минимум 10 символов">
+            </textarea>
+
+            <button type="submit">
+                Отправить заявку
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <section class="requests-block">
+
+        <h2>Зарегистрированные заявки</h2>
+
+        <div class="search-block">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Поиск заявки">
+
+            <button type="button" id="searchButton">
+                Найти
+            </button>
+
+        </div>
+
+        <label for="filter">Показать:</label>
+
+        <select id="filter">
+            <option value="Все">Все</option>
+            <option value="Новая">Новые</option>
+            <option value="Выполнено">Выполненные</option>
+        </select>
+
+        <div id="requests"></div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+

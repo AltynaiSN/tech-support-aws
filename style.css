@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f2f5f9;
+}
+
+header {
+    background-color: #24558a;
+    color: white;
+    padding: 20px;
+}
+
+
+main {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.form-block,
+.requests-block {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+h2 {
+    color: #24558a;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1976d2;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #125aa0;
+}
+
+.request-card {
+    margin-top: 15px;
+    padding: 15px;
+    border-left: 5px solid #1976d2;
+    background-color: #f7f9fc;
+    border-radius: 5px;
+}
+
+.search-block {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-block input {
+    flex: 1;
+}
+
+.search-block button {
+    margin-top: 0;
+}
+
+@media (max-width: 700px) {
+    main {
+        flex-direction: column;
+    }
+}
+
