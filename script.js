@@ -226,6 +226,43 @@ function applyFilter() {
 
     });
 
+    
+function checkAccess() {
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const adminBlock = document.getElementById('admin-block');
+    const authBtn = document.getElementById('auth-btn');
+
+    if (isAdmin) {
+        if (adminBlock) adminBlock.style.display = 'block';
+        if (authBtn) authBtn.innerText = 'Выйти (Админ)';
+    } else {
+        if (adminBlock) adminBlock.style.display = 'none';
+        if (authBtn) authBtn.innerText = 'Войти как admin';
+    }
+}
+
+
+function toggleAuth() {
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    if (isAdmin) {
+        localStorage.removeItem('isAdmin');
+        alert('Вы вышли из режима администратора');
+        checkAccess();
+    } else {
+        const password = prompt('Введите пароль администратора:');
+        if (password === 'admin123') {
+            localStorage.setItem('isAdmin', 'true');
+            alert('Доступ разрешен. Режим администратора активирован.');
+            checkAccess();
+        } else {
+            alert('Неверный пароль!');
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkAccess);
+
 
     displayRequests(result);
 
